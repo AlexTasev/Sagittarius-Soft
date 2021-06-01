@@ -1,13 +1,13 @@
-import "../styles/globals.scss";
+import { useState, useEffect } from "react";
 import type { AppProps } from "next/app";
-
-import { useEffect } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
-
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { CssBaseline, Switch } from "@material-ui/core";
+import "@fontsource/roboto";
+import "../styles/globals.scss";
 
 function SagittariusSoft({ Component, pageProps }: AppProps) {
+  const [darkMode, setDarkMode] = useState(true);
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -16,12 +16,16 @@ function SagittariusSoft({ Component, pageProps }: AppProps) {
     }
   }, []);
 
-  const theme = unstable_createMuiStrictModeTheme();
+  const theme = createMuiTheme({
+    palette: {
+      type: darkMode ? "dark" : "light",
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
+      <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
       <Component {...pageProps} />
     </ThemeProvider>
   );
