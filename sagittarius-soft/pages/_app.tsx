@@ -6,7 +6,7 @@ import "@fontsource/roboto";
 import "../styles/globals.scss";
 import Layout from "../components/layout/Layout";
 
-function SagittariusSoft({ Component, pageProps }: AppProps) {
+const SagittariusSoft = ({ Component, pageProps }: AppProps) => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -28,6 +28,8 @@ function SagittariusSoft({ Component, pageProps }: AppProps) {
     setDarkMode(!darkMode);
   };
 
+  darkMode ? (theme.palette.type = "dark") : (theme.palette.type = "light");
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -36,5 +38,5 @@ function SagittariusSoft({ Component, pageProps }: AppProps) {
       </Layout>
     </ThemeProvider>
   );
-}
+};
 export default SagittariusSoft;
