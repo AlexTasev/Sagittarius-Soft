@@ -3,12 +3,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Switch from "@material-ui/core/Switch";
-import { useTheme } from '@material-ui/core/styles';
 import classes from "./layout.module.scss";
 
-const Header: React.FC<{ onSwitchMode: () => void }> = ({ onSwitchMode }) => {
-  const theme= useTheme();
-
+const Header: React.FC<{ mode: boolean, onSwitchMode: () => void }> = ({ mode, onSwitchMode }) => {
   return (
     <AppBar position="static" color="default">
       <Toolbar>
@@ -17,7 +14,7 @@ const Header: React.FC<{ onSwitchMode: () => void }> = ({ onSwitchMode }) => {
           alt="Sagittarius Soft"
           className={classes.logo}
         />
-        <Switch color="primary" onChange={onSwitchMode}></Switch>
+        <Switch color="primary" onChange={onSwitchMode} checked={mode}></Switch>
         <IconButton
           edge="end"
           className={classes.menuButton}
