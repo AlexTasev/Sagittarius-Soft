@@ -19,7 +19,6 @@ const Layout: React.FC<{ onSwitchMode: () => void }> = ({ onSwitchMode, children
       <Header onSwitchMode={onSwitchMode} mode={isDarkMode}/>
       <main className={classes.layout}>{children}</main>
       <Footer onSwitchMode={onSwitchMode} mode={isDarkMode}/>
-      
     </>
   );
 };

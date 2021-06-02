@@ -5,6 +5,11 @@
   text-align: justify;
 }
 
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
 .logo {
   max-width: 10em;
   margin: 1em 0.5em 0.75em;
