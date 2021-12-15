@@ -1,37 +1,69 @@
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
+import { useState } from "react";
+import Link from "next/link";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  Switch,
+  List,
+  ListItem,
+  Drawer,
+  Button,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Switch from "@material-ui/core/Switch";
 import classes from "./layout.module.scss";
 
 const Header: React.FC<{ mode: boolean; onSwitchMode: () => void }> = ({
   mode,
   onSwitchMode,
 }) => {
+  const [openDrawer, setOpenDrawer] = useState(false);
   let showMenuIcon = false;
 
   if (process.browser) {
     showMenuIcon = window.innerWidth < 620 ? true : false;
   }
 
+  const toggleDrawer = (drawerState: boolean) => {
+    setOpenDrawer(true);
+  };
+
   return (
     <AppBar position="static" color="default">
       <Toolbar className={classes.navigation}>
-        <img
-          src="Sagittarius-logo.png"
-          alt="Sagittarius Soft"
-          className={classes.logo}
-        />
+        <Link href="/">
+          <a>
+            <img
+              src="Sagittarius-logo.png"
+              alt="Sagittarius Soft"
+              className={classes.logo}
+            />
+          </a>
+        </Link>
         <Box>
           {!showMenuIcon && (
             <>
-              <Button color="inherit">About</Button>
-              <Button color="inherit">Tech Stack</Button>
-              <Button color="inherit">Projects</Button>
-              <Button color="inherit">Contacts</Button>
+              <Button color="inherit">
+                <Link href="/projects">
+                  <a>About</a>
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link href="/projects">
+                  <a>Tech Stack</a>
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link href="/projects">
+                  <a>Projects</a>
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link href="/projects">
+                  <a>Contacts</a>
+                </Link>
+              </Button>
             </>
           )}
           <Switch
@@ -42,6 +74,7 @@ const Header: React.FC<{ mode: boolean; onSwitchMode: () => void }> = ({
           {showMenuIcon && (
             <>
               <IconButton
+                onClick={toggleDrawer(true)}
                 edge="end"
                 className={classes.menuButton}
                 color="inherit"
@@ -49,14 +82,30 @@ const Header: React.FC<{ mode: boolean; onSwitchMode: () => void }> = ({
               >
                 <MenuIcon color="primary" />
               </IconButton>
-              {/* <Drawer
-                anchor="right"
-                open={state.right}
-                onOpen={toggleDrawer("right", true)}
-                onClose={toggleDrawer("right", false)}
-              >
-                {sideDrawerList("right")}
-              </Drawer> */}
+              <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer(false)}>
+                <List>
+                  <ListItem color="inherit">
+                    <Link href="/projects">
+                      <a>About</a>
+                    </Link>
+                  </ListItem>
+                  <ListItem color="inherit">
+                    <Link href="/projects">
+                      <a>Tech Stack</a>
+                    </Link>
+                  </ListItem>
+                  <ListItem color="inherit">
+                    <Link href="/projects">
+                      <a>Projects</a>
+                    </Link>
+                  </ListItem>
+                  <ListItem color="inherit">
+                    <Link href="/projects">
+                      <a>Contacts</a>
+                    </Link>
+                  </ListItem>
+                </List>
+              </Drawer>
             </>
           )}
         </Box>
